@@ -2,6 +2,9 @@ import cv2
 import mediapipe as mp
 import time
 
+# Import your feature extraction function
+from feature_extraction import extract_pose_features
+
 mp_pose = mp.solutions.pose
 mp_drawing = mp.solutions.drawing_utils
 
@@ -43,6 +46,10 @@ def run_pose_estimation():
 
             # Draw skeleton if detected
             if results.pose_landmarks:
+                # 🔹 Extract features here
+                features = extract_pose_features(results.pose_landmarks)
+                print("Features:", features)
+
                 mp_drawing.draw_landmarks(
                     image_bgr,
                     results.pose_landmarks,
